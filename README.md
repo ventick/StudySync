@@ -31,9 +31,9 @@ StudySync - это платформа, где студенты могут нах
 
 Заполните перед сдачей:
 
-- Student 1
-- Student 2
-- Student 3
+- Davletov Akylbek
+- Ongarova Nurila
+- Toleubek Alan
 
 ## Как запустить frontend
 
