@@ -71,3 +71,5 @@ http://127.0.0.1:8000/api/health/
 2. Добавить страницы Angular и реальные API endpoint'ы.
 3. Подключить базу данных и модели.
 4. Обновить этот `README.md`: описание проекта, участников и GitHub repository link.
+=======
+# StudySync
