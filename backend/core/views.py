@@ -5,8 +5,9 @@ from rest_framework import status, permissions
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from django.shortcuts import get_object_or_404
-from .models import Subject, StudyGroup, Membership
-from .serializers import SubjectSerializer, StudyGroupSerializer, LoginSerializer
+
+from .models import Subject, StudyGroup, Membership, StudyRequest 
+from .serializers import SubjectSerializer, StudyGroupSerializer, LoginSerializer, StudyRequestSerialize
 
 
 @api_view(['POST'])
@@ -76,3 +77,22 @@ def subject_list(request):
     subjects = Subject.objects.all()
     serializer = SubjectSerializer(subjects, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def get_my_requests(request):
+    """Эндпоинт для получения заявок текущего пользователя"""
+    requests = StudyRequest.objects.filter(user=request.user)
+    serializer = StudyRequestSerializer(requests, many=True)
+    return Response(serializer.data)
+
+
+class StudyRequestList(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        serializer = StudyRequestSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
