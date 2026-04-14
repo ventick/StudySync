@@ -15,4 +15,4 @@ backend/__pycache__/
 backend/staticfiles/
 
 .idea/
-.vscode/
+.vscode/ 
