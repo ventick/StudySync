@@ -1,8 +1,13 @@
 from django.urls import path
-
-from .views import health_check
-
+from .views import (
+    login_view, logout_view, subject_list, 
+    GroupListCreateAPIView, GroupDetailAPIView
+)
 
 urlpatterns = [
-    path("health/", health_check, name="health-check"),
+    path('login/', login_view),
+    path('logout/', logout_view),
+    path('subjects/', subject_list),
+    path('groups/', GroupListCreateAPIView.as_view()),
+    path('groups/<int:pk>/', GroupDetailAPIView.as_view()),
 ]
