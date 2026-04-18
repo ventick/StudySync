@@ -1,45 +1,20 @@
-<main class="hero">
-  <section class="hero__panel">
-    <p class="eyebrow">Angular + Django starter</p>
-    <h1>{{ projectName }}</h1>
-    <p class="lead">
-      Учебный full-stack проект с подготовленным frontend, базовым Django backend
-      и понятной стартовой структурой для дальнейшей разработки.
-    </p>
+<div class="shell">
+  <header class="topbar">
+    <a class="brand" routerLink="/groups">StudySync</a>
 
-    <div class="hero__actions">
-      <a class="button button--primary" href="http://127.0.0.1:8000/api/health/" target="_blank" rel="noopener">
-        Проверить API
-      </a>
-      <a class="button button--secondary" href="https://angular.dev" target="_blank" rel="noopener">
-        Angular Docs
-      </a>
-    </div>
-  </section>
+    <nav class="nav">
+      @if (currentUser(); as user) {
+        <a class="nav__link" routerLink="/groups" routerLinkActive="nav__link--active">Groups</a>
+        <a class="nav__link" routerLink="/groups/new" routerLinkActive="nav__link--active">Create Group</a>
+        <span class="nav__user">{{ user.username }}</span>
+        <button class="nav__button" type="button" (click)="logout()">Logout</button>
+      } @else {
+        <a class="nav__link" routerLink="/login" routerLinkActive="nav__link--active">Login</a>
+      }
+    </nav>
+  </header>
 
-  <section class="info-grid" aria-label="Project overview">
-    <article class="card">
-      <span class="card__label">Frontend</span>
-      <h2>Angular</h2>
-      <p>Роутинг уже подключен, стартовая страница заменена на проектную заглушку.</p>
-    </article>
-
-    <article class="card">
-      <span class="card__label">Backend</span>
-      <h2>Django</h2>
-      <p>Подготовлен базовый каркас приложения и endpoint для проверки состояния API.</p>
-    </article>
-
-    <article class="card">
-      <span class="card__label">Next</span>
-      <h2>Что делать дальше</h2>
-      <ul>
-        <li>Выбрать тему проекта</li>
-        <li>Добавить модели и API</li>
-        <li>Сделать страницы и формы</li>
-      </ul>
-    </article>
-  </section>
-</main>
-
-<router-outlet />
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>
