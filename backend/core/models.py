@@ -43,5 +43,5 @@ class StudyRequest(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return f"Request from {self.user.username} to {self.group.title}"
     
