@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Subject, StudyGroup, Membership
-
+from .models import Subject, StudyGroup, Membership, StudyRequest 
 
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,10 +20,17 @@ class StudyGroupSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['creator', 'is_active']
 
-
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
 
 class RemoveMemberSerializer(serializers.Serializer):
     user_id = serializers.IntegerField()
+
+class StudyRequestSerializer(serializers.ModelSerializer):
+    user_name = serializers.ReadOnlyField(source='user.username')
+    
+    class Meta:
+        model = StudyRequest
+        fields = ['id', 'group', 'user', 'user_name', 'message', 'created_at']
+        read_only_fields = ['user']
